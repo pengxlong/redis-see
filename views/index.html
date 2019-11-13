@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Redis See</title>
+    <style type="text/css">
+	.left {
+		width: 25%;
+		float: left;
+		border-right:2px solid #ccc;
+		min-height: 750px;
+	}
+	.right {
+		width: 70%;
+		float: left;
+        padding-left: 20px;
+		padding-top: 20px;
+	}
+	.top {
+		text-align: center;
+	}
+	.name {
+		margin-bottom: 20px;
+		font-weight: bold;
+		color: #87B7FF; 
+	}
+	.list {
+		margin-top: 20px;
+		padding-left: 10px;
+	}
+    .key {
+        font-size: 16px;
+        width: 300px;
+        display: block;
+        overflow: hidden;
+        word-break: keep-all;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    } 
+    a {
+        text-decoration:none;
+        color: #6B7080;
+    }
+    a:hover {
+        color: #75A0F4;
+    }
+    .value {
+    	width: 600px;
+    	height: 600px;
+        margin-top:10px;
+        padding: 5px;
+    	border-radius: 2px;
+    	border: 1px solid #ccc;
+    	word-wrap: break-word;
+    }
+</style>
+</head>
+<body>
+    <div class="left">
+    	<form action="{{.host}}" method="get">
+    		<div class="top">
+    			<div class="name">Redis See</div>
+                <input type="text" name="filter"/> <input type="submit" value="filter">
+    		</div>
+    	</form>
+        <div class="list">
+            <div style="width: 300px; height:30px; border-bottom: 1px solid #6B7080; margin-bottom: 5px;">Keys:</div>
+            {{range $i, $v := .keys}}
+                <li class="key">
+                    ·<a href="{{$.host}}?key={{$v}}">{{$v}}</a>
+                </li>
+            {{end}}
+        </div>
+    </div>
+    <div class="right">
+        <div>Value: </div>
+        <div class="value">
+            {{.value}}
+        </div>
+    </div>
+</body>
+</html>
